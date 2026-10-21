@@ -49,6 +49,7 @@
                       -->
               <img style="width: 1rem;"
                 class="transition transform hover:scale-110 hover:opacity-80"
+                decoding="async"
                 src="${value:iconUrl}" />
             </with>
           </ema:metadata>
