@@ -57,7 +57,7 @@
         <icon />
         <else />
         <has-children>
-          <a href="${node:url}" title="View Children">
+          <a href="${node:url}" title="View Children" aria-label="View Children of ${node:text}">
             <icon />
           </a>
           <else />
@@ -77,7 +77,7 @@
         </span>
       </node:terminal>
     </tree:open>
-    <a href="https://github.com/developing-today/zettel/new/main/${node:source-file-base}" title="New@${node:source-file-base}/">
+    <a href="https://github.com/developing-today/zettel/new/main/${node:source-file-base}" title="New@${node:source-file-base}/" aria-label="New note at ${node:source-file-base}/">
       <svg style="width: 1rem;" class="hover :text-${theme}-700" fill="none" stroke="currentColor"
         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
