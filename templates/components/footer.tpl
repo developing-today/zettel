@@ -1,13 +1,13 @@
 <footer class="flex items-center justify-center mt-2 mb-8 space-x-4 text-center text-gray-800">
   <bind tag="iconClass">w-6 h-6 hover:text-${theme}-700</bind>
   <div>
-    <a title="Search (Ctrl+K)" class="cursor-pointer"
+    <a title="Search (Ctrl+K)" aria-label="Search (Ctrl+K)" class="cursor-pointer"
       onclick="window.emanote.stork.toggleSearch()">
       <apply template="stork/stork-icon" />
     </a>
   </div>
   <div>
-    <a href="${ema:homeUrl}" title="Go Home">
+    <a href="${ema:homeUrl}" title="Go Home" aria-label="Go Home">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -16,7 +16,7 @@
     </a>
   </div>
   <div>
-    <a href="${ema:indexUrl}" title="View Index">
+    <a href="${ema:indexUrl}" title="View Index" aria-label="View Index">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -25,7 +25,7 @@
     </a>
   </div>
   <div>
-    <a href="${ema:tagIndexUrl}" title="View Tags">
+    <a href="${ema:tagIndexUrl}" title="View Tags" aria-label="View Tags">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -35,7 +35,7 @@
     </a>
   </div>
   <div>
-    <a href="${ema:taskIndexUrl}" title="View Tasks">
+    <a href="${ema:taskIndexUrl}" title="View Tasks" aria-label="View Tasks">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -44,7 +44,7 @@
     </a>
   </div>
   <div>
-    <a href="https://developing.today" target="_blank" title="developing.today (Emanote ${ema:version})">
+    <a href="https://developing.today" target="_blank" title="developing.today (Emanote ${ema:version})" aria-label="developing.today (Emanote ${ema:version})">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <g stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -56,7 +56,7 @@
     </a>
   </div>
   <div>
-    <a href="https://github.com/developing-today/zettel/edit/main/${ema:note:source-path}" title="Edit This Page">
+    <a href="https://github.com/developing-today/zettel/edit/main/${ema:note:source-path}" title="Edit This Page" aria-label="Edit This Page">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -65,7 +65,7 @@
     </a>
   </div>
   <div>
-    <a href="${value:deleteBaseUrl}/${ema:note:source-path}" title="Delete This Page">
+    <a href="${value:deleteBaseUrl}/${ema:note:source-path}" title="Delete This Page" aria-label="Delete This Page">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -74,21 +74,11 @@
     </a>
   </div>
   <div>
-    <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" title="New@${ema:note:source-file-base}/">
+    <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" title="New@${ema:note:source-file-base}/" aria-label="New note under ${ema:note:source-file-base}/">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M12 4.5v15m7.5-7.5h-15">
-        </path>
-      </svg>
-    </a>
-  </div>
-  <div>
-    <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" title="New@${ema:note:source-file-base}/">
-      <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
-          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z">
         </path>
       </svg>
     </a>
