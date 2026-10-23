@@ -73,22 +73,13 @@
       </svg>
     </a>
   </div>
+  <!-- Performance Optimization: Removed duplicate 'New' link to reduce DOM overhead -->
   <div>
     <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" title="New@${ema:note:source-file-base}/">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M12 4.5v15m7.5-7.5h-15">
-        </path>
-      </svg>
-    </a>
-  </div>
-  <div>
-    <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" title="New@${ema:note:source-file-base}/">
-      <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
-          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z">
         </path>
       </svg>
     </a>
