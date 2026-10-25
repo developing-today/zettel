@@ -1,11 +1,11 @@
 <!-- Variable bindings for this tree-->
-<bind tag="link-class">hover:bg-${theme}-200</bind>
+<bind tag="link-class">hover:bg-${theme}-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500</bind>
 <node:active>
-  <bind tag="link-class">mavenLinkBold bg-${theme}-100 hover:bg-${theme}-200</bind>
+  <bind tag="link-class">mavenLinkBold bg-${theme}-100 hover:bg-${theme}-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500</bind>
   <else />
   <node:activeTree>
     <has-current-route>
-      <bind tag="link-class">mavenLinkBold hover:bg-${theme}-200</bind>
+      <bind tag="link-class">mavenLinkBold hover:bg-${theme}-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500</bind>
     </has-current-route>
   </node:activeTree>
 </node:active>
@@ -57,7 +57,7 @@
         <icon />
         <else />
         <has-children>
-          <a href="${node:url}" aria-label="View Children" title="View Children">
+          <a href="${node:url}" aria-label="View Children" title="View Children" class="focus:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500 rounded p-0.5 inline-flex items-center justify-center">
             <icon />
           </a>
           <else />
@@ -77,7 +77,7 @@
         </span>
       </node:terminal>
     </tree:open>
-    <a href="https://github.com/developing-today/zettel/new/main/${node:source-file-base}" aria-label="New Note in Folder" title="New@${node:source-file-base}/">
+    <a href="https://github.com/developing-today/zettel/new/main/${node:source-file-base}" aria-label="New Note in Folder" title="New@${node:source-file-base}/" class="focus:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500 rounded p-0.5 inline-flex items-center justify-center">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
