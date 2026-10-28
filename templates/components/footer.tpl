@@ -1,13 +1,13 @@
 <footer class="flex items-center justify-center mt-2 mb-8 space-x-4 text-center text-gray-800">
   <bind tag="iconClass">w-6 h-6 hover:text-${theme}-700</bind>
   <div>
-    <a aria-label="Search" title="Search (Ctrl+K)" class="cursor-pointer"
+    <a aria-label="Search" title="Search (Ctrl+K)" class="cursor-pointer inline-block rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500"
       onclick="window.emanote.stork.toggleSearch()">
       <apply template="stork/stork-icon" />
     </a>
   </div>
   <div>
-    <a href="${ema:homeUrl}" aria-label="Go Home" title="Go Home">
+    <a href="${ema:homeUrl}" aria-label="Go Home" title="Go Home" class="inline-block rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -16,7 +16,7 @@
     </a>
   </div>
   <div>
-    <a href="${ema:indexUrl}" aria-label="View Index" title="View Index">
+    <a href="${ema:indexUrl}" aria-label="View Index" title="View Index" class="inline-block rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -25,7 +25,7 @@
     </a>
   </div>
   <div>
-    <a href="${ema:tagIndexUrl}" aria-label="View Tags" title="View Tags">
+    <a href="${ema:tagIndexUrl}" aria-label="View Tags" title="View Tags" class="inline-block rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -35,7 +35,7 @@
     </a>
   </div>
   <div>
-    <a href="${ema:taskIndexUrl}" aria-label="View Tasks" title="View Tasks">
+    <a href="${ema:taskIndexUrl}" aria-label="View Tasks" title="View Tasks" class="inline-block rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -44,7 +44,7 @@
     </a>
   </div>
   <div>
-    <a href="https://developing.today" target="_blank" aria-label="developing.today website" title="developing.today (Emanote ${ema:version})">
+    <a href="https://developing.today" target="_blank" aria-label="developing.today website" title="developing.today (Emanote ${ema:version})" class="inline-block rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <g stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -56,7 +56,7 @@
     </a>
   </div>
   <div>
-    <a href="https://github.com/developing-today/zettel/edit/main/${ema:note:source-path}" aria-label="Edit This Page" title="Edit This Page">
+    <a href="https://github.com/developing-today/zettel/edit/main/${ema:note:source-path}" aria-label="Edit This Page" title="Edit This Page" class="inline-block rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -65,7 +65,7 @@
     </a>
   </div>
   <div>
-    <a href="${value:deleteBaseUrl}/${ema:note:source-path}" aria-label="Delete This Page" title="Delete This Page">
+    <a href="${value:deleteBaseUrl}/${ema:note:source-path}" aria-label="Delete This Page" title="Delete This Page" class="inline-block rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -74,7 +74,7 @@
     </a>
   </div>
   <div>
-    <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" aria-label="New Note" title="New@${ema:note:source-file-base}/">
+    <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" aria-label="New Note" title="New@${ema:note:source-file-base}/" class="inline-block rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -84,7 +84,7 @@
     </a>
   </div>
   <div>
-    <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" aria-label="New Note in Folder" title="New@${ema:note:source-file-base}/">
+    <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" aria-label="New Note in Folder" title="New@${ema:note:source-file-base}/" class="inline-block rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
