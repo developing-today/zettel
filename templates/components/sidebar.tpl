@@ -2,7 +2,7 @@
   class="flex-shrink hidden leading-relaxed md:block md:sticky md:top-0 md:max-h-screen md:overflow-y-auto md:w-48 xl:w-64">
   <div class="px-2 py-2 text-gray-800">
     <div id="indexing-links" class="flex flex-row float-right p-2 space-x-2 text-gray-500">
-      <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" aria-label="New Note in Folder" title="New@${ema:note:source-file-base}/">
+      <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" aria-label="New Note in Folder" title="New@${ema:note:source-file-base}/" class="inline-block rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-blue-500">
         <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -10,7 +10,7 @@
           </path>
         </svg>
       </a>
-      <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" aria-label="New Note" title="New@${ema:note:source-file-base}/">
+      <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" aria-label="New Note" title="New@${ema:note:source-file-base}/" class="inline-block rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-blue-500">
         <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -18,14 +18,14 @@
           </path>
         </svg>
       </a>
-      <a href="https://github.com/developing-today/zettel/edit/main/${ema:note:source-path}" aria-label="Edit This Page" title="Edit This Page">
+      <a href="https://github.com/developing-today/zettel/edit/main/${ema:note:source-path}" aria-label="Edit This Page" title="Edit This Page" class="inline-block rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-blue-500">
         <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
         </svg>
       </a>
-      <a href="${ema:indexUrl}" aria-label="View Index" title="View Index">
+      <a href="${ema:indexUrl}" aria-label="View Index" title="View Index" class="inline-block rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-blue-500">
         <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -33,14 +33,16 @@
           </path>
         </svg>
       </a>
-      <a aria-label="Search" title="Search (Ctrl+K)" class="cursor-pointer"
-        onclick="window.emanote.stork.toggleSearch()">
+      <a aria-label="Search" title="Search (Ctrl+K)" role="button" tabindex="0"
+        class="cursor-pointer inline-block rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-blue-500"
+        onclick="window.emanote.stork.toggleSearch()"
+        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.emanote.stork.toggleSearch();}">
         <apply template="stork/stork-icon" />
       </a>
     </div>
     <div id="site-logo" class="pl-2">
       <div class="flex items-center my-2 space-x-2 justify-left">
-        <a href="${ema:homeUrl}" aria-label="Go Home" title="Go Home">
+        <a href="${ema:homeUrl}" aria-label="Go Home" title="Go Home" class="inline-block rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-blue-500">
           <ema:metadata>
             <with var="template">
               <!-- The style width attribute here is to prevent huge
@@ -55,7 +57,7 @@
             </with>
           </ema:metadata>
         </a>
-        <a class="font-bold truncate" title="Go Home" href="${ema:homeUrl}">
+        <a class="font-bold truncate rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-blue-500" title="Go Home" href="${ema:homeUrl}">
           ⌂
         </a>
       </div>
