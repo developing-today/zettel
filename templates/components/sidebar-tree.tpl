@@ -13,14 +13,14 @@
 <has-children>
   <bind tag="icon">
     <tree:open>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
         class="${iconSize} inline text-gray-700" fill="currentColor">
         <path fill-rule="evenodd"
           d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm3 10.5a.75.75 0 0 0 0-1.5H9a.75.75 0 0 0 0 1.5h6Z"
           clip-rule="evenodd" />
       </svg>
       <else />
-      <svg xmlns="http://www.w3.org/2000/svg" class="${iconSize} inline text-gray-500"
+      <svg xmlns="http://www.w3.org/2000/svg" class="${iconSize} inline text-gray-500" width="24" height="24"
         viewBox="0 0 24 24" fill="currentColor">
         <path fill-rule="evenodd"
           d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z"
@@ -31,14 +31,14 @@
   <else />
   <bind tag="icon">
     <node:active>
-      <svg class="${iconSize} inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+      <svg class="${iconSize} inline" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
         </path>
       </svg>
       <else />
-      <svg class="${iconSize} inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+      <svg class="${iconSize} inline" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z">
@@ -78,7 +78,7 @@
       </node:terminal>
     </tree:open>
     <a href="https://github.com/developing-today/zettel/new/main/${node:source-file-base}" aria-label="New Note in Folder" title="New@${node:source-file-base}/">
-      <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
+      <svg style="width: 1rem; height: 1rem;" width="16" height="16" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M12 4.5v15m7.5-7.5h-15">
