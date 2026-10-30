@@ -1,0 +1,45 @@
+# Thin caller for this repo's dispatch-scheduled agents, replacing the
+# retired Jules scheduled tasks + Suggestions.
+#
+# This file contains no task logic: the task list, slot table, and
+# prompts live centrally in developing-today/code — the reusable
+# workflow .github/workflows/pm-scheduled.yml and the pm-dispatch-task
+# prompt library it dispatches through.
+#
+# Times are America/Chicago converted from CDT:
+#   tasks (bolt + palette) 08:30 CDT = 13:30 UTC
+#   suggestions 12:00 CDT = 17:00 UTC
+# GitHub cron is UTC-only, so during CST the local fire time shifts one
+# hour earlier.
+name: Agents
+
+on:
+  schedule:
+    - cron: '30 13 * * *'
+    - cron: '0 17 * * *'
+  workflow_dispatch:
+    inputs:
+      task:
+        description: Task to dispatch
+        type: choice
+        options:
+          - all
+          - bolt
+          - palette
+          - suggestions
+        default: all
+        required: true
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  scheduled:
+    uses: developing-today/code/.github/workflows/pm-scheduled.yml@main
+    permissions:
+      id-token: write
+      contents: read
+    with:
+      schedule: ${{ github.event.schedule }}
+      tasks: ${{ (github.event_name == 'workflow_dispatch' && inputs.task != 'all') && inputs.task || '' }}
