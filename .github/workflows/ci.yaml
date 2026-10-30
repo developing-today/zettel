@@ -25,3 +25,16 @@ jobs:
       - run: nix build -o ./_site
       - if: inputs.upload-artifact
         uses: actions/upload-pages-artifact@main
+  ci-fix:
+    needs: [ci]
+    if: failure()
+    permissions:
+      id-token: write
+      issues: read
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: developing-today/code/.github/actions/pm-dispatch-ci-fix@main
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}

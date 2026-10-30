@@ -1,0 +1,75 @@
+# Single home for this repo's dispatch-scheduled agents, replacing the
+# retired Jules scheduled tasks + Suggestions.
+#
+# Times are America/Chicago converted from CDT:
+#   tasks (bolt + palette) 08:30 CDT = 13:30 UTC
+#   suggestions 12:00 CDT = 17:00 UTC
+# GitHub cron is UTC-only, so during CST the local fire time shifts one
+# hour earlier.
+#
+# Prompts live in the central library in developing-today/code's
+# pm-dispatch-task action; this workflow only dispatches them.
+name: Agents
+
+on:
+  schedule:
+    - cron: '30 13 * * *'
+    - cron: '0 17 * * *'
+  workflow_dispatch:
+    inputs:
+      task:
+        description: Task to dispatch
+        type: choice
+        options:
+          - all
+          - bolt
+          - palette
+          - suggestions
+        default: all
+        required: true
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  scheduled:
+    runs-on: ubuntu-latest
+    steps:
+      - id: bolt
+        if: (github.event_name == 'schedule' && github.event.schedule == '30 13 * * *') || (github.event_name == 'workflow_dispatch' && (inputs.task == 'all' || inputs.task == 'bolt'))
+        uses: developing-today/code/.github/actions/pm-dispatch-task@main
+        with:
+          task: bolt
+      - id: palette
+        if: (github.event_name == 'schedule' && github.event.schedule == '30 13 * * *') || (github.event_name == 'workflow_dispatch' && (inputs.task == 'all' || inputs.task == 'palette'))
+        uses: developing-today/code/.github/actions/pm-dispatch-task@main
+        with:
+          task: palette
+      - id: suggestions
+        if: (github.event_name == 'schedule' && github.event.schedule == '0 17 * * *') || (github.event_name == 'workflow_dispatch' && (inputs.task == 'all' || inputs.task == 'suggestions'))
+        uses: developing-today/code/.github/actions/pm-dispatch-task@main
+        with:
+          task: suggestions
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### bolt"
+            echo "- task_id: ${{ steps.bolt.outputs.task_id }}"
+            echo "- session_id: ${{ steps.bolt.outputs.session_id }}"
+            echo "- issue_number: ${{ steps.bolt.outputs.issue_number }}"
+            echo "- issue_url: ${{ steps.bolt.outputs.issue_url }}"
+            echo ""
+            echo "### palette"
+            echo "- task_id: ${{ steps.palette.outputs.task_id }}"
+            echo "- session_id: ${{ steps.palette.outputs.session_id }}"
+            echo "- issue_number: ${{ steps.palette.outputs.issue_number }}"
+            echo "- issue_url: ${{ steps.palette.outputs.issue_url }}"
+            echo ""
+            echo "### suggestions"
+            echo "- task_id: ${{ steps.suggestions.outputs.task_id }}"
+            echo "- session_id: ${{ steps.suggestions.outputs.session_id }}"
+            echo "- issue_number: ${{ steps.suggestions.outputs.issue_number }}"
+            echo "- issue_url: ${{ steps.suggestions.outputs.issue_url }}"
+          } >> "$GITHUB_STEP_SUMMARY"
