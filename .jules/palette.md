@@ -1,0 +1,3 @@
+## 2026-10-30 - Focus States for Heist/Emanote Templates
+**Learning:** Icon-only navigation links in Heist (`.tpl`) static site templates often lack explicit focus indicators, making keyboard navigation difficult for screen reader and keyboard users. Using Tailwind `focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-${theme}-500` ensures focus rings adapt seamlessly to the dynamic theme variable without affecting pointer hover styling.
+**Action:** When working with Heist template UI components in Emanote sites, systematically inspect header/sidebar/footer icon links to ensure focus-visible ring classes are present on all clickable elements.
