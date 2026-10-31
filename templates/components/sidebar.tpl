@@ -1,5 +1,6 @@
 <nav id="sidebar"
-  class="flex-shrink hidden leading-relaxed md:block md:sticky md:top-0 md:max-h-screen md:overflow-y-auto md:w-48 xl:w-64">
+  class="flex-shrink hidden leading-relaxed md:block md:sticky md:top-0 md:max-h-screen md:overflow-y-auto md:w-48 xl:w-64"
+  aria-label="Sidebar navigation">
   <div class="px-2 py-2 text-gray-800">
     <div id="indexing-links" class="flex flex-row float-right p-2 space-x-2 text-gray-500">
       <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" aria-label="New Note in Folder" title="New@${ema:note:source-file-base}/">
@@ -33,10 +34,10 @@
           </path>
         </svg>
       </a>
-      <a aria-label="Search" title="Search (Ctrl+K)" class="cursor-pointer"
+      <button type="button" aria-label="Search" title="Search (Ctrl+K)" class="cursor-pointer hover:text-${theme}-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500 rounded"
         onclick="window.emanote.stork.toggleSearch()">
         <apply template="stork/stork-icon" />
-      </a>
+      </button>
     </div>
     <div id="site-logo" class="pl-2">
       <div class="flex items-center my-2 space-x-2 justify-left">
