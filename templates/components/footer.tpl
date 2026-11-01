@@ -1,10 +1,10 @@
 <footer class="flex items-center justify-center mt-2 mb-8 space-x-4 text-center text-gray-800">
   <bind tag="iconClass">w-6 h-6 hover:text-${theme}-700</bind>
   <div>
-    <a aria-label="Search" title="Search (Ctrl+K)" class="cursor-pointer"
+    <button type="button" aria-label="Search" title="Search (Ctrl+K)" class="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-600 rounded"
       onclick="window.emanote.stork.toggleSearch()">
       <apply template="stork/stork-icon" />
-    </a>
+    </button>
   </div>
   <div>
     <a href="${ema:homeUrl}" aria-label="Go Home" title="Go Home">
