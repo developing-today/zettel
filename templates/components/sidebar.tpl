@@ -48,6 +48,8 @@
                       hasn't kicked in immediately on page load
                       -->
               <img style="width: 1rem;"
+                width="16"
+                height="16"
                 class="transition transform hover:scale-110 hover:opacity-80"
                 decoding="async"
                 src="${value:iconUrl}"
