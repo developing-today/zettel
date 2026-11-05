@@ -1,3 +1,5 @@
+<ema:metadata>
+  <with var="template">
 <footer class="flex items-center justify-center mt-2 mb-8 space-x-4 text-center text-gray-800">
   <bind tag="iconClass">w-6 h-6 hover:text-${theme}-700</bind>
   <div>
@@ -56,7 +58,7 @@
     </a>
   </div>
   <div>
-    <a href="https://github.com/developing-today/zettel/edit/main/${ema:note:source-path}" aria-label="Edit This Page" title="Edit This Page">
+    <a href="${value:editBaseUrl}/${ema:note:source-path}" aria-label="Edit This Page" title="Edit This Page">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -74,7 +76,7 @@
     </a>
   </div>
   <div>
-    <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" aria-label="New Note" title="New@${ema:note:source-file-base}/">
+    <a href="${value:newBaseUrl}" aria-label="New Note" title="New Note">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -84,7 +86,7 @@
     </a>
   </div>
   <div>
-    <a href="https://github.com/developing-today/zettel/new/main/${ema:note:source-file-base}" aria-label="New Note in Folder" title="New@${ema:note:source-file-base}/">
+    <a href="${value:newBaseUrl}/${ema:note:source-file-base}" aria-label="New Note in Folder" title="New note in ${ema:note:source-file-base}/">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -94,3 +96,5 @@
     </a>
   </div>
 </footer>
+  </with>
+</ema:metadata>
