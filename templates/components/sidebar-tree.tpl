@@ -77,7 +77,9 @@
         </span>
       </node:terminal>
     </tree:open>
-    <a href="https://github.com/developing-today/zettel/new/main/${node:source-file-base}" aria-label="New Note in Folder" title="New@${node:source-file-base}/">
+    <ema:metadata>
+      <with var="template">
+    <a href="${value:newBaseUrl}/${node:source-file-base}" aria-label="New Note in Folder" title="New note in ${node:source-file-base}/">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -85,6 +87,8 @@
         </path>
       </svg>
     </a>
+      </with>
+    </ema:metadata>
   </div>
 
   <!-- Node's children forest, displayed only on active trees
