@@ -33,10 +33,11 @@
           </path>
         </svg>
       </a>
-      <a aria-label="Search" title="Search (Ctrl+K)" class="cursor-pointer"
+      <button type="button" aria-label="Search" title="Search (Ctrl+K)"
+        class="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-gray-400 rounded"
         onclick="window.emanote.stork.toggleSearch()">
         <apply template="stork/stork-icon" />
-      </a>
+      </button>
     </div>
     <div id="site-logo" class="pl-2">
       <div class="flex items-center my-2 space-x-2 justify-left">
