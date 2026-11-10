@@ -1,0 +1,3 @@
+## 2025-02-18 - Semantic button elements for interactive triggers in Emanote templates
+**Learning:** In Emanote Heist templates, JavaScript actions like search modals (`window.emanote.stork.toggleSearch()`) are frequently attached to unlinked `<a>` tags with `cursor-pointer`. This breaks keyboard navigation (unlinked `<a>` without `href` is not in the tab order by default) and fails screen-reader semantics.
+**Action:** Use semantic `<button type="button">` with focus-visible styling (e.g. `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-${theme}-500 rounded`) for in-page action triggers instead of anchor elements.
