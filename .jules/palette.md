@@ -1,0 +1,3 @@
+## 2026-02-18 - Search triggers require semantic `<button>` instead of unlinked `<a>` tags
+**Learning:** In Emanote Heist templates, JavaScript-driven actions such as `window.emanote.stork.toggleSearch()` were authored using `<a>` tags without an `href` attribute. In HTML, anchor tags without `href` are not keyboard focusable (omitted from the sequential tab order) and lack button accessibility semantics for screen readers. Using `<button type="button">` with Tailwind's `focus-visible:ring-2` restores keyboard accessibility and screen reader navigation.
+**Action:** For all interactive JS triggers (like search modals, drawers, toggles), always use `<button type="button">` with `focus:outline-none focus-visible:ring-2` rather than `<a>` tags without `href`.
