@@ -45,9 +45,14 @@
             <with var="template">
               <!-- The style width attribute here is to prevent huge
                       icon from displaying at those rare occasions when Tailwind
-                      hasn't kicked in immediately on page load
+                      hasn't kicked in immediately on page load.
+                      Explicit width/height attributes prevent Cumulative Layout Shift (CLS),
+                      and fetchpriority="high" prioritizes fetching this critical above-the-fold asset.
                       -->
               <img style="width: 1rem;"
+                width="16"
+                height="16"
+                fetchpriority="high"
                 class="transition transform hover:scale-110 hover:opacity-80"
                 decoding="async"
                 src="${value:iconUrl}"
