@@ -45,11 +45,15 @@
             <with var="template">
               <!-- The style width attribute here is to prevent huge
                       icon from displaying at those rare occasions when Tailwind
-                      hasn't kicked in immediately on page load
+                      hasn't kicked in immediately on page load.
+                      Explicit width/height prevent Cumulative Layout Shift (CLS)
+                      before CSS or image assets finish loading.
                       -->
               <img style="width: 1rem;"
                 class="transition transform hover:scale-110 hover:opacity-80"
                 decoding="async"
+                width="16"
+                height="16"
                 src="${value:iconUrl}"
                 alt="Site Icon" />
             </with>
