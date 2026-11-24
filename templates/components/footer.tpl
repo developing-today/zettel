@@ -2,7 +2,7 @@
   <bind tag="iconClass">w-6 h-6 hover:text-${theme}-700</bind>
   <div>
     <button type="button" aria-label="Search" title="Search (Ctrl+K)"
-      class="cursor-pointer border-0 bg-transparent p-0" onclick="window.emanote.stork.toggleSearch()">
+      class="cursor-pointer border-0 bg-transparent p-0 hover:text-${theme}-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-${theme}-500 rounded" onclick="window.emanote.stork.toggleSearch()">
       <apply template="stork/stork-icon" />
     </button>
   </div>
@@ -44,7 +44,7 @@
     </a>
   </div>
   <div>
-    <a href="https://developing.today" target="_blank" aria-label="developing.today website" title="developing.today (Emanote ${ema:version})">
+    <a href="https://developing.today" target="_blank" rel="noopener noreferrer" aria-label="developing.today website" title="developing.today (Emanote ${ema:version})">
       <svg style="width: 1rem;" class="hover:text-${theme}-700" fill="none" stroke="currentColor"
           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <g stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
