@@ -23,6 +23,15 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - run: nix build -o ./_site
+      - name: Verify configured page-action links
+        run: |
+          page=./_site/Pages/file.html
+          edit_base_url="$(sed -n 's/^  editBaseUrl: //p' index.yaml)"
+          new_base_url="$(sed -n 's/^  newBaseUrl: //p' index.yaml)"
+          grep -Fq "href='${edit_base_url}/Pages/file.md'" "$page"
+          grep -Fq "href='${new_base_url}' aria-label='New Note'" "$page"
+          grep -Fq "href='${new_base_url}/Pages/file' aria-label='New Note in Folder'" "$page"
+          ! grep -Fq '${value:' "$page"
       - if: inputs.upload-artifact
         uses: actions/upload-pages-artifact@main
   ci-fix:
