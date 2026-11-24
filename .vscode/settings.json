@@ -17,7 +17,7 @@
   },
   "pasteImage.insertPattern": "![[${imageFilePath}]]",
   "search.exclude": {
-    ".direnv": true
+    ".direnv": true,
     ".history": true
   }
   // If use Git, these might be interesting:
