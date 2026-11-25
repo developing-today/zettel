@@ -15,7 +15,16 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = nixpkgs.lib.systems.flakeExposed;
       imports = [ inputs.emanote.flakeModule ];
-      perSystem = { self', pkgs, system, ... }: {
+      perSystem = { self', pkgs, system, ... }:
+        let
+          format = pkgs.writeShellApplication {
+            name = "format";
+            runtimeInputs = [ pkgs.treefmt pkgs.nixpkgs-fmt pkgs.nodePackages.prettier ];
+            text = ''
+              exec treefmt "$@"
+            '';
+          };
+        in {
         emanote = {
           # By default, the 'emanote' flake input is used.
           # package = inputs.emanote.packages.${system}.default;
@@ -33,16 +42,10 @@
             pkgs.treefmt
           ];
         };
-        formatter = pkgs.treefmt;
+        formatter = format;
         apps.format = {
           type = "app";
-          program = "${pkgs.writeShellApplication {
-            name = "format";
-            runtimeInputs = [ pkgs.treefmt pkgs.nixpkgs-fmt pkgs.nodePackages.prettier ];
-            text = ''
-              exec treefmt "$@"
-            '';
-          }}/bin/format";
+          program = "${format}/bin/format";
         };
       };
     };

@@ -47,10 +47,7 @@ jobs:
           # source revision. Exclude this in-progress run from the API result.
           last_success_sha="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/auto-format.yml/runs?branch=main&status=success&per_page=20" \
             --jq ".workflow_runs[] | select(.id != $GITHUB_RUN_ID) | .head_sha" | head -n 1 || true)"
-          changed_file="$(mktemp)"
-          trap 'rm -f "$changed_file"' EXIT
-          : > "$changed_file"
-
+          changed_files=()
           if [[ -n "$last_success_sha" ]] \
             && git cat-file -e "${last_success_sha}^{commit}" 2>/dev/null \
             && git merge-base --is-ancestor "$last_success_sha" "$head_sha"; then
@@ -58,22 +55,35 @@ jobs:
               echo "main is unchanged since the last successful format pass ($head_sha)."
               exit 0
             fi
-            git diff --name-only --diff-filter=ACMR "$last_success_sha...$head_sha" > "$changed_file"
+            mapfile -d '' -t changed_files < <(
+              git diff --name-only -z --diff-filter=ACMR "$last_success_sha...$head_sha"
+            )
           else
-            git log --since="25 hours ago" --pretty=format: --name-only \
-              | sort -u | while IFS= read -r path; do
-                  [[ -n "$path" && -f "$path" ]] && printf '%s\n' "$path"
-                done > "$changed_file"
+            mapfile -d '' -t changed_paths < <(
+              git log --since="25 hours ago" --pretty=format: --name-only -z \
+                | sort -zu \
+                | while IFS= read -r -d '' path; do
+                    if [[ -n "$path" && -f "$path" ]]; then
+                      printf '%s\0' "$path"
+                    fi
+                  done
+            )
+            changed_files=("${changed_paths[@]}")
           fi
 
-          mapfile -t changed_files < <(grep -E '\.(nix|md|mdx)$' "$changed_file" || true)
-          if ((${#changed_files[@]} == 0)); then
+          format_files=()
+          for path in "${changed_files[@]}"; do
+            case "$path" in
+              *.nix|*.md|*.mdx) format_files+=("$path") ;;
+            esac
+          done
+          if ((${#format_files[@]} == 0)); then
             echo "No changed Nix or Markdown files to format."
             exit 0
           fi
 
-          nix run .#format -- "${changed_files[@]}"
-          git add -- "${changed_files[@]}"
+          nix run .#format -- --walk=filesystem "${format_files[@]}"
+          git add -- "${format_files[@]}"
           if git diff --cached --quiet; then
             echo "Formatting made no changes."
             exit 0
