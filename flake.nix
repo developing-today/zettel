@@ -29,9 +29,21 @@
         devShells.default = pkgs.mkShell {
           buildInputs = [
             pkgs.nixpkgs-fmt
+            pkgs.prettier
+            pkgs.treefmt
           ];
         };
-        formatter = pkgs.nixpkgs-fmt;
+        formatter = pkgs.treefmt;
+        apps.format = {
+          type = "app";
+          program = "${pkgs.writeShellApplication {
+            name = "format";
+            runtimeInputs = [ pkgs.treefmt pkgs.nixpkgs-fmt pkgs.prettier ];
+            text = ''
+              exec treefmt "$@"
+            '';
+          }}/bin/format";
+        };
       };
     };
 }

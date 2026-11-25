@@ -1,0 +1,8 @@
+[formatter.nix]
+command = "nixpkgs-fmt"
+includes = ["*.nix"]
+
+[formatter.markdown]
+command = "prettier"
+includes = ["*.md", "*.mdx"]
+options = ["--write"]
