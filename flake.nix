@@ -29,7 +29,7 @@
         devShells.default = pkgs.mkShell {
           buildInputs = [
             pkgs.nixpkgs-fmt
-            pkgs.prettier
+            pkgs.nodePackages.prettier
             pkgs.treefmt
           ];
         };
@@ -38,7 +38,7 @@
           type = "app";
           program = "${pkgs.writeShellApplication {
             name = "format";
-            runtimeInputs = [ pkgs.treefmt pkgs.nixpkgs-fmt pkgs.prettier ];
+            runtimeInputs = [ pkgs.treefmt pkgs.nixpkgs-fmt pkgs.nodePackages.prettier ];
             text = ''
               exec treefmt "$@"
             '';
