@@ -59,16 +59,29 @@ jobs:
               git diff --name-only -z --diff-filter=ACMR "$last_success_sha...$head_sha"
             )
           else
-            mapfile -d '' -t changed_paths < <(
-              git log --since="25 hours ago" --pretty=format: --name-only -z \
-                | sort -zu \
-                | while IFS= read -r -d '' path; do
-                    if [[ -n "$path" && -f "$path" ]]; then
-                      printf '%s\0' "$path"
-                    fi
-                  done
-            )
-            changed_files=("${changed_paths[@]}")
+            workflow_commit="$(git log -n 1 --diff-filter=A --format=%H -- .github/workflows/auto-format.yml)"
+            if [[ -n "$workflow_commit" ]] \
+              && git cat-file -e "${workflow_commit}^1" 2>/dev/null \
+              && git merge-base --is-ancestor "${workflow_commit}^1" "$head_sha"; then
+              # On the first pass, use the workflow's introduction as the
+              # baseline so we do not format unrelated recent repository work.
+              mapfile -d '' -t changed_files < <(
+                git diff --name-only -z --diff-filter=ACMR "${workflow_commit}^1...$head_sha"
+              )
+            else
+              # Fallback for repositories where the workflow's introduction
+              # commit is unavailable in the fetched history.
+              mapfile -d '' -t changed_paths < <(
+                git log --since="25 hours ago" --pretty=format: --name-only -z \
+                  | sort -zu \
+                  | while IFS= read -r -d '' path; do
+                      if [[ -n "$path" && -f "$path" ]]; then
+                        printf '%s\0' "$path"
+                      fi
+                    done
+              )
+              changed_files=("${changed_paths[@]}")
+            fi
           fi
 
           format_files=()
