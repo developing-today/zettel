@@ -1,0 +1,106 @@
+name: auto-format
+
+# Formatting is advisory maintenance and never gates a merge. A successful
+# workflow run records the source SHA it checked; later passes only inspect
+# changes since that SHA. The workflow is scheduled/manual only, so its bot
+# commit cannot start another pass.
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: auto-format-main
+  cancel-in-progress: false
+
+jobs:
+  format:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa # v23
+
+      - name: Format changes and commit fixes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git fetch origin main
+          git reset --hard origin/main
+          head_sha="$(git rev-parse HEAD)"
+
+          # A completed successful run's head_sha is the last processed
+          # source revision. Exclude this in-progress run from the API result.
+          last_success_sha="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/auto-format.yml/runs?branch=main&status=success&per_page=20" \
+            --jq ".workflow_runs[] | select(.id != $GITHUB_RUN_ID) | .head_sha" | head -n 1 || true)"
+          changed_files=()
+          if [[ -n "$last_success_sha" ]] \
+            && git cat-file -e "${last_success_sha}^{commit}" 2>/dev/null \
+            && git merge-base --is-ancestor "$last_success_sha" "$head_sha"; then
+            if [[ "$last_success_sha" == "$head_sha" ]]; then
+              echo "main is unchanged since the last successful format pass ($head_sha)."
+              exit 0
+            fi
+            mapfile -d '' -t changed_files < <(
+              git diff --name-only -z --diff-filter=ACMR "$last_success_sha...$head_sha"
+            )
+          else
+            workflow_commit="$(git log -n 1 --diff-filter=A --format=%H -- .github/workflows/auto-format.yml)"
+            if [[ -n "$workflow_commit" ]] \
+              && git cat-file -e "${workflow_commit}^1" 2>/dev/null \
+              && git merge-base --is-ancestor "${workflow_commit}^1" "$head_sha"; then
+              # On the first pass, use the workflow's introduction as the
+              # baseline so we do not format unrelated recent repository work.
+              mapfile -d '' -t changed_files < <(
+                git diff --name-only -z --diff-filter=ACMR "${workflow_commit}^1...$head_sha"
+              )
+            else
+              # Fallback for repositories where the workflow's introduction
+              # commit is unavailable in the fetched history.
+              mapfile -d '' -t changed_paths < <(
+                git log --since="25 hours ago" --pretty=format: --name-only -z \
+                  | sort -zu \
+                  | while IFS= read -r -d '' path; do
+                      if [[ -n "$path" && -f "$path" ]]; then
+                        printf '%s\0' "$path"
+                      fi
+                    done
+              )
+              changed_files=("${changed_paths[@]}")
+            fi
+          fi
+
+          format_files=()
+          for path in "${changed_files[@]}"; do
+            case "$path" in
+              *.nix|*.md|*.mdx) format_files+=("$path") ;;
+            esac
+          done
+          if ((${#format_files[@]} == 0)); then
+            echo "No changed Nix or Markdown files to format."
+            exit 0
+          fi
+
+          nix run .#format -- --walk=filesystem "${format_files[@]}"
+          git add -- "${format_files[@]}"
+          if git diff --cached --quiet; then
+            echo "Formatting made no changes."
+            exit 0
+          fi
+
+          git commit -m "style(treefmt): auto-format on main"
+          git push origin HEAD:main
