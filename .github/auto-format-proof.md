@@ -2,7 +2,7 @@
 
 This paragraph has deliberately irregular spacing and a verylongunbrokenwordthatisusedtomakeprettierreflowthislineandproduceaverifiablechangeinthedefaultbranchworkflow.
 
-| file | purpose |
-|---|---|
-| `flake.nix` | Nix formatter |
-| `*.md` | Markdown formatter |
+| file        | purpose            |
+| ----------- | ------------------ |
+| `flake.nix` | Nix formatter      |
+| `*.md`      | Markdown formatter |

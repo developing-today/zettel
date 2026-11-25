@@ -24,29 +24,30 @@
               exec treefmt "$@"
             '';
           };
-        in {
-        emanote = {
-          # By default, the 'emanote' flake input is used.
-          # package = inputs.emanote.packages.${system}.default;
-          sites."default" = {
-            layers = [{ path = ./.; pathString = "."; }];
-            # port = 8080;
-            # baseUrl = "/zettle/"; # Change to "/" (or remove it entirely) if using CNAME
-            prettyUrls = true;
+        in
+        {
+          emanote = {
+            # By default, the 'emanote' flake input is used.
+            # package = inputs.emanote.packages.${system}.default;
+            sites."default" = {
+              layers = [{ path = ./.; pathString = "."; }];
+              # port = 8080;
+              # baseUrl = "/zettle/"; # Change to "/" (or remove it entirely) if using CNAME
+              prettyUrls = true;
+            };
+          };
+          devShells.default = pkgs.mkShell {
+            buildInputs = [
+              pkgs.nixpkgs-fmt
+              pkgs.nodePackages.prettier
+              pkgs.treefmt
+            ];
+          };
+          formatter = format;
+          apps.format = {
+            type = "app";
+            program = "${format}/bin/format";
           };
         };
-        devShells.default = pkgs.mkShell {
-          buildInputs = [
-            pkgs.nixpkgs-fmt
-            pkgs.nodePackages.prettier
-            pkgs.treefmt
-          ];
-        };
-        formatter = format;
-        apps.format = {
-          type = "app";
-          program = "${format}/bin/format";
-        };
-      };
     };
 }
