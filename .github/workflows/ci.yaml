@@ -19,9 +19,9 @@ jobs:
     environment: ci
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
-      - uses: DeterminateSystems/nix-installer-action@main
-      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a
+      - uses: DeterminateSystems/nix-installer-action@2559b44fed7d4fc978e8dd0e379661afb8b73590
+      - uses: DeterminateSystems/magic-nix-cache-action@8941f279e15828abcd2fc8fbb7cd282ab00972a7
       - run: nix build -o ./_site
       - name: Verify configured page-action links
         run: |
@@ -33,7 +33,7 @@ jobs:
           grep -Fq "href='${new_base_url}/Pages/file' aria-label='New Note in Folder'" "$page"
           ! grep -Fq '${value:' "$page"
       - if: inputs.upload-artifact
-        uses: actions/upload-pages-artifact@main
+        uses: actions/upload-pages-artifact@5f327015a708106f6f1b7c9a633901af30fe80cb
   ci-fix:
     needs: [ci]
     if: failure()
@@ -43,7 +43,7 @@ jobs:
       contents: read
     runs-on: ubuntu-latest
     steps:
-      - uses: developing-today/code/.github/actions/pm-dispatch-ci-fix@main
+      - uses: developing-today/code/.github/actions/pm-dispatch-ci-fix@e854869564836b813919c959e9126697a63359dd
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
