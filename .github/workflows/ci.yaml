@@ -43,6 +43,12 @@ jobs:
       contents: read
     runs-on: ubuntu-latest
     steps:
+      - name: Check out centralized dispatch action dependencies
+        uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a
+        with:
+          repository: developing-today/code
+          ref: e854869564836b813919c959e9126697a63359dd
+          path: .pm-central
       - uses: developing-today/code/.github/actions/pm-dispatch-ci-fix@e854869564836b813919c959e9126697a63359dd
         continue-on-error: true
         env:
