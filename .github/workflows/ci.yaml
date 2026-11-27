@@ -20,6 +20,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a
+      - name: Verify central dispatch pins stay synchronized
+        run: |
+          python3 - <<'PY'
+          import pathlib
+          import re
+
+          workflow = pathlib.Path('.github/workflows/ci.yaml').read_text()
+          checkout = re.findall(r'repository: developing-today/code\s+ref: ([0-9a-f]{40})\s+path: \.pm-central', workflow)
+          action = re.findall(r'uses: developing-today/code/\.github/actions/pm-dispatch-ci-fix@([0-9a-f]{40})', workflow)
+          if len(checkout) != 1 or len(action) != 1 or checkout != action:
+              raise SystemExit('Update the central checkout and pm-dispatch-ci-fix action pins together')
+          PY
       - uses: DeterminateSystems/nix-installer-action@2559b44fed7d4fc978e8dd0e379661afb8b73590
       - uses: DeterminateSystems/magic-nix-cache-action@8941f279e15828abcd2fc8fbb7cd282ab00972a7
       - run: nix build -o ./_site
