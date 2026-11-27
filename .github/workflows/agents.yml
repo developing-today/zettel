@@ -31,12 +31,11 @@ on:
         required: true
 
 permissions:
-  id-token: write
   contents: read
 
 jobs:
   scheduled:
-    uses: developing-today/code/.github/workflows/pm-scheduled.yml@main
+    uses: developing-today/code/.github/workflows/pm-scheduled.yml@286d33b0cf7011238bbae162a2864bd4f63839ef
     permissions:
       id-token: write
       contents: read
